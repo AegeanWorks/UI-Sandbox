@@ -54,7 +54,10 @@ ui-sandbox/
 ├── .gitignore
 ├── assets/
 │   ├── logo.jpg
-│   └── social-preview.png
+│   ├── social-preview.png
+│   └── screenshots/
+│       ├── 2026-11-03-dev.png
+│       └── 2026-11-03-prod.png
 ├── LICENSE
 ├── LICENSES/
 │   └── LicenseRef-AL-1.1.txt
@@ -81,6 +84,7 @@ ui-sandbox/
     ├── guidelines.md
     ├── media.json
     ├── project.json
+    ├── reforge.json
     ├── task_ledger.json
     ├── ui.json
     └── ui_history.json
