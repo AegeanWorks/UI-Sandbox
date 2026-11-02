@@ -102,3 +102,13 @@ ui-sandbox/
 ## 📜 License
 
 Free for personal use under the Aegean License 1.1 (AL-1.1); see [LICENSE](LICENSE). Any commercial use needs the Aegean Commercial License 1.0 (ACL-1.0); see [COMMERCIAL.md](COMMERCIAL.md).
+
+<!-- aegean:screenshots:start -->
+## Screenshots
+
+<a href="https://github.com/AegeanWorks/UI-Sandbox/commit/2a7663d"><img src="assets/screenshots/2026-11-03-dev.png" alt="UI Sandbox dev server at 2026-11-03"></a>
+
+<a href="https://github.com/AegeanWorks/UI-Sandbox/commit/2a7663d"><img src="assets/screenshots/2026-11-03-prod.png" alt="UI Sandbox production preview at 2026-11-03"></a>
+
+*commit `2a7663d` · 2026-11-03 · viewport 1440x900 · dev server plus production preview after `npm run build`*
+<!-- aegean:screenshots:end -->

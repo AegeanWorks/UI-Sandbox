@@ -42,6 +42,45 @@
       }
     }
   },
-  "screenshots": [],
+  "screenshots": [
+    {
+      "path": "assets/screenshots/2026-11-03-dev.png",
+      "alt": "UI Sandbox dev server at 2026-11-03",
+      "caption": "One-screen surface from npm run dev (http://localhost:4177): counter, search cues, panels, tokens, dark-theme toggle.",
+      "commit": "2a7663db1296cdd6688e6c368e8d95966866929f",
+      "taken_at": "2026-11-03",
+      "viewport": "1440x900",
+      "width": 1440,
+      "height": 900,
+      "status": "approved",
+      "review": {
+        "status": "approved",
+        "reviewer": "agent:kilo",
+        "method": "vision",
+        "notes": "Real headless-Edge capture of the dev build: header badges, all four panels, filter input, labelled controls and theme toggle all legible. Fresh default state.",
+        "score": 93,
+        "reviewed_at": "2026-11-03"
+      }
+    },
+    {
+      "path": "assets/screenshots/2026-11-03-prod.png",
+      "alt": "UI Sandbox production preview at 2026-11-03",
+      "caption": "Same surface from vite preview after npm run build: pixel-identical, proving the shipped bundle.",
+      "commit": "2a7663db1296cdd6688e6c368e8d95966866929f",
+      "taken_at": "2026-11-03",
+      "viewport": "1440x900",
+      "width": 1440,
+      "height": 900,
+      "status": "approved",
+      "review": {
+        "status": "approved",
+        "reviewer": "agent:kilo",
+        "method": "vision",
+        "notes": "Real capture of the production bundle: identical pixels to dev, which is the honest expectation for this static surface; pair proves the build, not just the server.",
+        "score": 90,
+        "reviewed_at": "2026-11-03"
+      }
+    }
+  ],
   "model": "community/scriptsnsenses-sys/flux-2-dev-free"
 }

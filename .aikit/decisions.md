@@ -47,6 +47,13 @@ contract, a dependency, a data format or the architecture; IDs are consecutive a
 - **Decision**: Add `color: var(--text)` to `.app` in `src/styles.css`, add `aria-pressed` to `theme-toggle` and `aria-live="polite"` to `counter-value` in `src/App.jsx`, use `path.extname` in `scripts/ui-inventory.mjs`, set `ui_required: true` and `test_command: "npm test"` in `.aikit/project.json`, sync `package-lock.json` to `0.2.0`, and cover these invariants in `tests/app.test.mjs`.
 - **Consequences**: Light theme text contrast is restored, `npm test` guards against raw color literals or missing `.app` color binding, and `aikit check --strict` enforces surface digest evidence on every delivery.
 
+### ADR-006: First screenshot keepers are the dev server and the production preview
+- **Date**: 2026-11-03
+- **Status**: Accepted
+- **Context**: UI Sandbox had approved wireframe brand (6/6) but `assets/screenshots/` was empty and `media.json screenshots: []`; the app is one static screen, so a second view cannot come from navigation.
+- **Decision**: Capture headless Edge at viewport 1440x900, commit `2a7663d`: `2026-11-03-dev.png` (`npm run dev` on localhost:4177) and `2026-11-03-prod.png` (`vite preview` on localhost:4178 after `npm run build`). Register both in `.aikit/media.json` and the README `aegean:screenshots` block; the pair proves the build output, not just the server.
+- **Consequences**: README shows current proof for the single surface. Reproduce with the two serves plus headless `--screenshot` each.
+
 ## Licensing migration (v0.1.2-agpl)
 
 - New versions use the Aegean License 1.1 (AL-1.1); versions up to and including `v0.1.2-agpl` remain under GNU AGPL-3.0.
