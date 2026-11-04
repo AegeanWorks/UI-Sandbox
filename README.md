@@ -25,6 +25,7 @@ simple: one screen, token-driven theming, and a labelled control for every inter
 | Run the dev server | `npm run dev` |
 | Run the Node test suite | `npm test` |
 | Build the production bundle | `npm run build` |
+| Preview the production bundle | `npm run preview` |
 | Print the UI inventory | `npm run ui:snapshot` |
 
 GitHub Actions repeats the install, test, build and inventory steps on every push to `master` and
@@ -73,12 +74,14 @@ ui-sandbox/
 │   └── ui-inventory.mjs
 ├── src/
 │   ├── App.jsx
+│   ├── contrast.mjs
 │   ├── main.jsx
 │   ├── styles.css
 │   ├── theme.css
 │   └── tokens.mjs
 ├── tests/
 │   ├── app.test.mjs
+│   ├── contrast.test.mjs
 │   ├── inventory.test.mjs
 │   └── tokens.test.mjs
 └── .aikit/

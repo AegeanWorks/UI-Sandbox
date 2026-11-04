@@ -61,6 +61,13 @@ contract, a dependency, a data format or the architecture; IDs are consecutive a
 - **Decision**: Move `ACCENT_IDS`, `DEFAULT_TOKENS` (frozen), `normalizeRadius` and `normalizeTokens` into `src/tokens.mjs`; `App.jsx` imports them, returns copies on every read, clamps live slider input, validates the accent choice, and copies on reset. Cover all fallbacks plus the no-shared-reference invariant in `tests/tokens.test.mjs`.
 - **Consequences**: Corrupt localStorage can no longer brick the panel, the slider can never store `NaN`/out-of-range radii, and the inventory snapshot is unchanged (18 controls, 6 panels).
 
+### ADR-008: Extract the WCAG contrast proof into src/contrast.mjs with unit tests
+- **Date**: 2026-11-04
+- **Status**: Accepted
+- **Context**: Wave-4 coverage sweep found the headline contrast proof (`parseColor`, `luminance`, `contrastRatio` in `src/App.jsx`) had zero tests: a wrong ratio would silently print a false "AA" badge. The functions are pure, so they move without behavior change.
+- **Decision**: Move the three functions verbatim into `src/contrast.mjs`; `App.jsx` imports `contrastRatio`. Cover the known vectors in `tests/contrast.test.mjs` (black/white 21:1, identical 1:1, red/white ~4:1 below AA, unparseable tokens yield `null`). Also document the existing `npm run preview` script in the README command table.
+- **Consequences**: The AA claim is pinned by tests (20/20 green); the inventory snapshot is unchanged.
+
 ## Licensing migration (v0.1.2-agpl)
 
 - New versions use the Aegean License 1.1 (AL-1.1); versions up to and including `v0.1.2-agpl` remain under GNU AGPL-3.0.
