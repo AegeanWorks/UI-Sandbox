@@ -54,6 +54,13 @@ contract, a dependency, a data format or the architecture; IDs are consecutive a
 - **Decision**: Capture headless Edge at viewport 1440x900, commit `2a7663d`: `2026-11-03-dev.png` (`npm run dev` on localhost:4177) and `2026-11-03-prod.png` (`vite preview` on localhost:4178 after `npm run build`). Register both in `.aikit/media.json` and the README `aegean:screenshots` block; the pair proves the build output, not just the server.
 - **Consequences**: README shows current proof for the single surface. Reproduce with the two serves plus headless `--screenshot` each.
 
+### ADR-007: Extract token normalization into src/tokens.mjs with regression tests
+- **Date**: 2026-11-04
+- **Status**: Accepted
+- **Context**: Wave-1 audit of the token-panel history found three verified defects in `src/App.jsx`: `readStoredTokens` returned the shared `DEFAULT_TOKENS` reference (reset passed the same object identity, so React could bail out and any future mutation would corrupt the defaults), the radius slider stored raw `Number(event.target.value)` (empty or non-numeric input becomes `0`/`NaN` and renders `--radius: 0px` until reload), and the persistence/clamping logic had zero test coverage.
+- **Decision**: Move `ACCENT_IDS`, `DEFAULT_TOKENS` (frozen), `normalizeRadius` and `normalizeTokens` into `src/tokens.mjs`; `App.jsx` imports them, returns copies on every read, clamps live slider input, validates the accent choice, and copies on reset. Cover all fallbacks plus the no-shared-reference invariant in `tests/tokens.test.mjs`.
+- **Consequences**: Corrupt localStorage can no longer brick the panel, the slider can never store `NaN`/out-of-range radii, and the inventory snapshot is unchanged (18 controls, 6 panels).
+
 ## Licensing migration (v0.1.2-agpl)
 
 - New versions use the Aegean License 1.1 (AL-1.1); versions up to and including `v0.1.2-agpl` remain under GNU AGPL-3.0.

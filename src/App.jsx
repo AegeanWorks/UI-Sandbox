@@ -1,4 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import {
+  ACCENT_IDS,
+  DEFAULT_TOKENS,
+  normalizeRadius,
+  normalizeTokens,
+} from "./tokens.mjs";
 
 const CUES = [
   {
@@ -30,10 +36,7 @@ const PANELS = [
   { id: "tokens", label: "Tokens", detail: "Live accent, radius and density controls." },
 ];
 
-const DEFAULT_RADIUS = 18;
 const TOKEN_STORAGE_KEY = "ui-sandbox-tokens";
-const ACCENT_IDS = ["aurora", "ember", "forest", "mono"];
-const DEFAULT_TOKENS = { accent: "aurora", radius: DEFAULT_RADIUS, compact: false };
 
 const THEME_STORAGE_KEY = "ui-sandbox-theme";
 const CONTRAST_TARGET = 4.5;
@@ -68,23 +71,12 @@ function preferredTheme() {
 
 function readStoredTokens() {
   if (typeof window === "undefined") {
-    return DEFAULT_TOKENS;
+    return { ...DEFAULT_TOKENS };
   }
   try {
-    const stored = JSON.parse(window.localStorage.getItem(TOKEN_STORAGE_KEY) || "null");
-    if (!stored || typeof stored !== "object") {
-      return DEFAULT_TOKENS;
-    }
-    return {
-      accent: ACCENT_IDS.includes(stored.accent) ? stored.accent : DEFAULT_TOKENS.accent,
-      radius:
-        Number.isInteger(stored.radius) && stored.radius >= 4 && stored.radius <= 28
-          ? stored.radius
-          : DEFAULT_TOKENS.radius,
-      compact: typeof stored.compact === "boolean" ? stored.compact : DEFAULT_TOKENS.compact,
-    };
+    return normalizeTokens(JSON.parse(window.localStorage.getItem(TOKEN_STORAGE_KEY) || "null"));
   } catch {
-    return DEFAULT_TOKENS;
+    return { ...DEFAULT_TOKENS };
   }
 }
 
@@ -177,7 +169,11 @@ export default function App() {
     );
   }, [theme, accent]);
 
-  const chooseAccent = (value) => setTokens((current) => ({ ...current, accent: value }));
+  const chooseAccent = (value) =>
+    setTokens((current) => ({
+      ...current,
+      accent: ACCENT_IDS.includes(value) ? value : current.accent,
+    }));
 
   const results = useMemo(() => {
     const needle = query.trim().toLowerCase();
@@ -379,7 +375,7 @@ export default function App() {
                 onChange={(event) =>
                   setTokens((current) => ({
                     ...current,
-                    radius: Number(event.target.value),
+                    radius: normalizeRadius(event.target.value),
                   }))
                 }
                 step="1"
@@ -402,7 +398,7 @@ export default function App() {
               <button
                 className="button button-ghost"
                 data-ui="token-reset"
-                onClick={() => setTokens(DEFAULT_TOKENS)}
+                onClick={() => setTokens({ ...DEFAULT_TOKENS })}
                 type="button"
               >
                 Reset tokens

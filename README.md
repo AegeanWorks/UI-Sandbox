@@ -75,10 +75,12 @@ ui-sandbox/
 │   ├── App.jsx
 │   ├── main.jsx
 │   ├── styles.css
-│   └── theme.css
+│   ├── theme.css
+│   └── tokens.mjs
 ├── tests/
 │   ├── app.test.mjs
-│   └── inventory.test.mjs
+│   ├── inventory.test.mjs
+│   └── tokens.test.mjs
 └── .aikit/
     ├── decisions.md
     ├── guidelines.md
