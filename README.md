@@ -9,6 +9,10 @@
 A small React + Vite surface for exercising AIKit's bounded UI guard. The app is deliberately
 simple: one screen, token-driven theming, and a labelled control for every interaction.
 
+> Never double-click `index.html`: browsers cannot run the uncompiled sources
+> directly, so that only ever shows a blank page. Start the dev server
+> (`npm run dev`, or double-click `run.cmd`) and open the served URL instead.
+
 ## ⚡ 30-Second Cold-Start Quick Reference
 
 - **Runtime Prerequisites**: Node.js 20+ and npm 10+ (Node 26 tested).
@@ -23,6 +27,7 @@ simple: one screen, token-driven theming, and a labelled control for every inter
 |---|---|
 | Install dependencies | `npm install` |
 | Run the dev server | `npm run dev` |
+| One-click run on Windows | double-click `run.cmd` (installs, serves on port 5199, opens the page) |
 | Run the Node test suite | `npm test` |
 | Build the production bundle | `npm run build` |
 | Preview the production bundle | `npm run preview` |
