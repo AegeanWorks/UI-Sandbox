@@ -12,7 +12,11 @@ export function parseColor(value) {
   if (rgb) {
     const parts = rgb[1].split(",").map((part) => Number.parseFloat(part));
     if (parts.length >= 3 && parts.slice(0, 3).every(Number.isFinite)) {
-      return parts.slice(0, 3).map((part) => part / 255);
+      // Clamp wild channels (e.g. "rgb(999, -5, 0)") so the proof can never
+      // report a ratio above the 21:1 physical maximum.
+      return parts
+        .slice(0, 3)
+        .map((part) => Math.min(255, Math.max(0, part)) / 255);
     }
   }
   return null;

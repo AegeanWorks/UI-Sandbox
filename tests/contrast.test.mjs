@@ -25,6 +25,12 @@ test("unparseable tokens yield an unknown proof instead of a number", () => {
   assert.equal(contrastRatio("#ffffff", "transparent"), null);
 });
 
+test("out-of-range channels clamp so the ratio never exceeds 21:1", () => {
+  assert.deepEqual(parseColor("rgb(999, -5, 0)"), [1, 0, 0]);
+  const ratio = contrastRatio("rgb(999, 999, 999)", "#000000");
+  assert.ok(ratio <= 21, `expected <= 21, got ${ratio}`);
+});
+
 test("luminance follows the WCAG linearization", () => {
   assert.equal(luminance([0, 0, 0]), 0);
   assert.equal(luminance([1, 1, 1]), 1);

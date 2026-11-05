@@ -71,6 +71,7 @@ ui-sandbox/
 ├── README.md
 ├── COMMERCIAL.md
 ├── index.html
+├── run.cmd                   <- one-click run on Windows: server + browser
 ├── package.json
 ├── package-lock.json
 ├── vite.config.js
